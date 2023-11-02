@@ -1,21 +1,6 @@
 import {Component} from 'react'
 import MusicItem from '../MusicItem'
-
-import {
-    BgContainer,
-    ArtistBg,
-    ArtistName,
-    ArtistInfo,
-    PlayListContainer,
-    PlatListHeading,
-    SearchInput,
-    MusicList,
-    EmptyContainer,
-    NoSongsText,
-
-
-
-} from './styledComponents'
+import './index.css'
 
 const initialTrackList=[
     {
@@ -116,9 +101,9 @@ class MusicPlayList extends Component{
     }
 
     renderNoSongsFoundView=()=>{
-        <EmptyContainer>
-            <NoSongsText>No Songs Found</NoSongsText>
-        </EmptyContainer>
+        <div className="empty-container">
+            <p className="no-songs-text">No Songs Found</p>
+        </div>
     }
     
 
@@ -128,38 +113,38 @@ class MusicPlayList extends Component{
             eachTrack.name.toLowerCase().includes{searchInput.toLowerCase()},
             )
             return (
-                <BgContainer>
-                    <ArtistBg data-testid="artist-details">
-                        <ArtistName>
-                            Ed Sheeran
+                <div className="bg-container">
+                    <div className="artist-bg" data-testid="artist-details">
+                        <h1 className="artist-name">
+                            Ed Shreen
                             <br/>
-                            <ArtistInfo>Singer</ArtistInfo>
-                        </ArtistName>
-                    </ArtistBg>
-                    <PlayListContainer>
-                        <PlayListHeading>Songs PlayList</PlayListHeading>
-                        <SearchInput
+                            <p className="artist-info">Singer</p>
+                        </h1>
+                    </div>
+                    <div className="playlist-container">
+                        <h1 className="playlist-heading">Songs Playlist</h1>
+                        <input
+                          className="search-input"
                           type="search"
                           value={searchInput}
                           placeholder="Search"
                           onChange={this.onChangeSearchInput}
-                    />      
-                    </PlayListContainer>
-                    {searchResults.length===0?(
+                        />  
+                    </div>
+                    {searchResults.length===0 ? (
                         this.renderNoSongsFoundView()
-
                     ):(
-                      <MusicList>
-                          {searchResults.map(eachItem=>(
-                              <MusicItem
-                                keys={eachItem.id}
-                                MusicItemDetails={eachItem}
-                                onClickDeleteTrack={this.onClickDeleteTrack}
-                               /> 
-                          ))}
-                      </MusicList>
+                        <ul className="music-list">
+                            {searchResults.map(eachItem=>(
+                                <MusicItem
+                                  key={eachItem.id}
+                                  MusicItemDetails={eachItem}
+                                  onClickDeleteTrack={this.onClickDeleteTrack}
+                                />  
+                            ))}
+                        </ul>
                     )}
-                </BgContainer>
+                </div>
             )
     }
 }

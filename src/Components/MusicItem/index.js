@@ -1,16 +1,6 @@
 import {AiOutlineDelete} from 'react-icons/ai'
 
-import {
-  MusicListItem,
-  TrackInfoContainer,
-  MusicTrackImage,
-  NameGenreContainer,
-  Name,
-  Genre,
-  DurationDeleteContainer,
-  Duration,
-  DeleteButton,
-} from './styledComponents'
+import './index.css'
 
 const MusicItem = props => {
   const {MusicItemDetails, onClickDeleteTrack} = props
@@ -20,25 +10,26 @@ const MusicItem = props => {
   }
 
   return (
-    <MusicListItem>
-      <TrackInfoContainer>
-        <MusicTrackImage src={imageUrl} alt="track" />
-        <NameGenreContainer>
-          <Name>{name}</Name>
-          <Genre>{genre}</Genre>
-        </NameGenreContainer>
-      </TrackInfoContainer>
-      <DurationDeleteContainer>
-        <Duration>{duration}</Duration>
-        <DeleteButton
+    <li className="music-list-item">
+      <div className="track-info-container">
+        <img className="music-track-image" src={imageUrl} alt="track" />
+        <div className="name-genre-container">
+          <p className="track-name">{name}</p>
+          <p className="genre">{genre}</p>
+        </div>
+      </div>
+      <div className="duration-delete-container">
+        <p className="duration">{duration}</p>
+        <button
+          className="delete-button"
           type="button"
           data-testid="delete"
           onClick={onDeleteTrack}
         >
           <AiOutlineDelete size={25} />
-        </DeleteButton>
-      </DurationDeleteContainer>
-    </MusicListItem>
+        </button>
+      </div>
+    </li>
   )
 }
 
